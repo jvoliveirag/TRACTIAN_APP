@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
+
 import axios from 'axios';
 import { FormEvent, useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
@@ -38,7 +40,7 @@ export default function Assets() {
         <div className={styles.description}>
 
           <div>
-            <a
+            <Link
               href="/"
             >
               By{' '}
@@ -49,7 +51,7 @@ export default function Assets() {
                 height={100}
                 priority
               />
-            </a>
+            </Link>
           </div>
 
           <div>

@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
+
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Card from '@/components/Card'
@@ -19,7 +21,7 @@ export default function Home() {
         <div className={styles.description}>
 
           <div>
-            <a
+            <Link
               href="https://tractian.com/"
               target="_blank"
               rel="noopener noreferrer"
@@ -32,7 +34,7 @@ export default function Home() {
                 height={100}
                 priority
               />
-            </a>
+            </Link>
           </div>
         </div>
 

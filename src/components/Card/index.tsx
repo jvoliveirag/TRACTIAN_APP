@@ -1,11 +1,13 @@
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
+
 import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Card({ title, description, path }: {title: string; description: string; path: string}) {
     return (
-        <a
+        <Link
             href={path}
             className={styles.card}
         >
@@ -15,6 +17,6 @@ export default function Card({ title, description, path }: {title: string; descr
         <p className={inter.className}>
           {description}
         </p>
-      </a>
+      </Link>
     )
 }

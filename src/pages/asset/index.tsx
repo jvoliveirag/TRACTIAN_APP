@@ -2,6 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+
 import axios from 'axios';
 import { FormEvent, useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
@@ -27,6 +30,21 @@ export default function Assets() {
     })
   },[])
 
+  const options = {
+    chart: {
+      type: 'spline',
+      borderRadius: 10,
+      height: (9 / 16 * 100) + '%',
+    },
+    title: {
+      text: 'My chart'
+    },
+    series: [
+      {
+        data: [1, 2, 1, 4, 8, 3, 5]
+      }
+    ]
+  };
 
   return (
     <>
@@ -50,6 +68,13 @@ export default function Assets() {
               priority
             />
           </Link>
+        </div>
+
+        <div className={styles.graph}>
+          <HighchartsReact highcharts={Highcharts} options={options} />
+          <HighchartsReact highcharts={Highcharts} options={options} />
+          <HighchartsReact highcharts={Highcharts} options={options} />
+          <HighchartsReact highcharts={Highcharts} options={options} />
         </div>
 
         <div className={styles.code}>

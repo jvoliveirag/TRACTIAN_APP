@@ -26,18 +26,34 @@ export default function Home() {
     })
   },[])
 
-  const options = {
+  const options1 = {
     chart: {
       type: 'spline',
       borderRadius: 10,
       height: (9 / 16 * 100) + '%',
     },
     title: {
-      text: 'My chart'
+      text: 'Health Score'
     },
     series: [
       {
-        data: [1, 2, 1, 4, 8, 3, 5]
+        data: [1,4,2,5,3,8]
+      }
+    ]
+  };
+
+  const options2 = {
+    chart: {
+      type: 'bar',
+      borderRadius: 10,
+      height: (9 / 16 * 100) + '%',
+    },
+    title: {
+      text: 'Health Score'
+    },
+    series: [
+      {
+        data: [8,4,2,5,3,1]
       }
     ]
   };
@@ -51,7 +67,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <main className={styles.main}>
-        
+
         <div className={styles.title}>
           <Link
             href="https://tractian.com/"
@@ -69,8 +85,10 @@ export default function Home() {
         </div>
         
         <div className={styles.graph}>
-          <HighchartsReact highcharts={Highcharts} options={options} />
-          <HighchartsReact highcharts={Highcharts} options={options} />
+
+          <HighchartsReact highcharts={Highcharts} options={options1} />
+          <HighchartsReact highcharts={Highcharts} options={options2} />
+
         </div>
 
         <div className={styles.grid}>

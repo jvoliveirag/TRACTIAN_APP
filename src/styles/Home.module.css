@@ -80,7 +80,33 @@
 
 .card p {
   margin: 0;
-  opacity: 0.6;
+  opacity: 0.8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 30ch;
+}
+
+.user {
+  padding: 1rem 1.2rem;
+  border-radius: var(--border-radius);
+  background: rgba(var(--user-rgb), 0);
+  border: 1px solid rgba(var(--user-border-rgb), 0);
+  transition: background 200ms, border 200ms;
+}
+
+.user span {
+  display: inline-block;
+  transition: transform 200ms;
+}
+
+.user h2 {
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+
+.user p {
+  margin: 0;
+  opacity: 0.8;
   font-size: 0.9rem;
   line-height: 1.5;
   max-width: 30ch;
@@ -130,12 +156,25 @@
   }
 
   .card:hover span {
-    transform: translateX(4px);
+    transform: translateX(8px);
+  }
+
+  .user:hover {
+    background: rgba(var(--user-rgb), 0);
+    border: 1px solid rgba(var(--user-border-rgb), 0);
+  }
+
+  .user:hover span {
+    transform: translateX(8px);
   }
 }
 
 @media (prefers-reduced-motion) {
   .card:hover span {
+    transform: none;
+  }
+
+  .user:hover span {
     transform: none;
   }
 }

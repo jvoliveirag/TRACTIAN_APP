@@ -33,7 +33,7 @@ export default function Home() {
       height: (9 / 16 * 100) + '%',
     },
     title: {
-      text: 'Health Score'
+      text: 'Temperatura Máxima [ºC]'
     },
     series: [
       {
@@ -49,7 +49,7 @@ export default function Home() {
       height: (9 / 16 * 100) + '%',
     },
     title: {
-      text: 'Health Score'
+      text: 'Saúde [%]'
     },
     series: [
       {

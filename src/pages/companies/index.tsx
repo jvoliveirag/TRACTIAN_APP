@@ -6,18 +6,15 @@ import axios from 'axios';
 import { FormEvent, useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
 
+import Card from '@/components/Card';
+
 
 export default function Assets() {
 
-  let id = 1
   const [assets, setAssets] = useState<any[]>([])
 
   useEffect(() => {
-    axios.get("https://my-json-server.typicode.com/tractian/fake-api/companies", {
-      params: {
-        id: id
-      }
-    })
+    axios.get("https://my-json-server.typicode.com/tractian/fake-api/units")
     .then((response) => {
       console.log(response.data)
       setAssets(response.data)
@@ -52,12 +49,17 @@ export default function Assets() {
           </Link>
         </div>
 
-        <div className={styles.code}>
-          {assets.map((company, key) => {
+        <div>
+          {assets.map((unit, key) => {
+
+            let company_name = ''
+            unit.companyId === 1 ? company_name = 'The Test Company' : company_name = 'Não encontrado'
+            let str1 = "Empresa: "
+            company_name = str1.concat(company_name)
 
             return(
-              <div key={key}>
-                <span className="">Nome: {company.name}</span><br></br>
+              <div className={styles.grid} key={key}>
+                <Card title={unit.name} description={company_name} path="https://tractian.com/"></Card>
               </div>
             )
 

@@ -9,17 +9,12 @@ import styles from '@/styles/Home.module.css'
 
 export default function Assets() {
 
-  let id = 1
   const [assets, setAssets] = useState<any[]>([])
 
   useEffect(() => {
-    axios.get("https://my-json-server.typicode.com/tractian/fake-api/workorders", {
-      params: {
-        id: id
-      }
-    })
+    axios.get("https://my-json-server.typicode.com/tractian/fake-api/workorders")
     .then((response) => {
-      console.log(response.data)
+      console.log(response.data)            
       setAssets(response.data)
     })
     .catch(() => {
@@ -55,10 +50,12 @@ export default function Assets() {
 
         <div className={styles.code}>
           {assets.map((workorder, key) => {
+            //console.log(workorder.assignedUserIds.length)
 
             return(
               <div key={key}>
                 <span className="">Task: {workorder.title}</span><br></br>
+                <span className="">Descrição: {workorder.description}</span><br></br>
                 <span className="">Assignees: {workorder.assignedUserIds}</span><br></br>
                 <span className="">Status: {workorder.status}</span><br></br>
                 <span className="">Prioridade: {workorder.priority}</span><br></br>

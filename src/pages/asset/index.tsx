@@ -9,7 +9,7 @@ import styles from '@/styles/Home.module.css'
 
 export default function Assets() {
 
-  let id = 4
+  let id = 1
   const [assets, setAssets] = useState<any[]>([])
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Assets() {
     .catch(() => {
       console.log("Algo deu errado")
     })
-  })
+  },[])
 
 
   return (
@@ -37,38 +37,38 @@ export default function Assets() {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.description}>
 
-          <div>
-            <Link
-              href="/"
-            >
-              By{' '}
-              <Image
-                src="/logo.png"
-                alt="Vercel Logo"
-                width={100}
-                height={100}
-                priority
-              />
-            </Link>
-          </div>
+        <div className={styles.title}>
+          <Link
+            href="/"
+          >
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={200}
+              height={30}
+              priority
+            />
+          </Link>
+        </div>
 
-          <div>
-            {assets.map((asset, key) => {
+        <div className={styles.code}>
+          {assets.map((asset, key) => {
 
-            return(
+            return (
               <div key={key}>
                 <span className="">Nome: {asset.name}</span><br></br>
                 <span className="">Modelo: {asset.model}</span><br></br>
-                <span className="">Status: {asset.status}</span>
+                <span className="">Status: {asset.status}</span><br></br>
+                <span className="">Total de coletas: {asset.metrics.totalCollectsUptime}</span><br></br>
+                <span className="">Horas coletadas: {asset.metrics.totalUptime}</span><br></br>
+                <span className="">Última coleta: {asset.metrics.lastUptimeAt}</span>
               </div>
             )
 
-            })}
-          </div>
-
+          })}
         </div>
+
       </main>
     </>
   )

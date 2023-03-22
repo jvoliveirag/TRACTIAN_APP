@@ -2,13 +2,46 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Inter } from 'next/font/google'
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 import styles from '@/styles/Home.module.css'
 import Card from '@/components/Card'
 
-const inter = Inter({ subsets: ['latin'] })
+import axios from 'axios';
+import { FormEvent, useState, useEffect } from 'react'
 
 export default function Home() {
+
+
+  const [assets, setAssets] = useState<any[]>([])
+
+  useEffect(() => {
+    axios.get("https://my-json-server.typicode.com/tractian/fake-api/assets")
+    .then((response) => {
+      console.log(response.data)
+      setAssets(response.data)
+    })
+    .catch(() => {
+      console.log("Algo deu errado")
+    })
+  },[])
+
+  const options = {
+    chart: {
+      type: 'spline',
+      borderRadius: 10,
+      height: (9 / 16 * 100) + '%',
+    },
+    title: {
+      text: 'My chart'
+    },
+    series: [
+      {
+        data: [1, 2, 1, 4, 8, 3, 5]
+      }
+    ]
+  };
+
   return (
     <>
       <Head>
@@ -18,41 +51,35 @@ export default function Home() {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.description}>
-
-          <div>
-            <Link
-              href="https://tractian.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={100}
-                height={100}
-                priority
-              />
-            </Link>
-          </div>
+        
+        <div className={styles.title}>
+          <Link
+            href="https://tractian.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={200}
+              height={30}
+              priority
+            />
+          </Link>
         </div>
-
-        <div className={styles.center}>
-
+        
+        <div className={styles.graph}>
+          <HighchartsReact highcharts={Highcharts} options={options} />
+          <HighchartsReact highcharts={Highcharts} options={options} />
         </div>
 
         <div className={styles.grid}>
-
-          <Card title="Ativos" description="Veja os usuários do sistema." path="asset"></Card>
-
-          <Card title="Unidades" description="Monitore informações dos ativos em tempo real." path="companies"></Card>
-
-          <Card title="Atividades" description="Confira ordens de trablho, seus status e asignees." path="workorders"></Card>
-
+          <Card title="Ativos" description="Monitore informações dos ativos em tempo real." path="asset"></Card>
+          <Card title="Unidades" description="Veja as empresas e suas respectivas unidades." path="companies"></Card>
+          <Card title="Atividades" description="Confira ordens de trabalho, seus status e asignees." path="workorders"></Card>
           <Card title="Colaboradores" description="Veja os usuários do sistema." path="users"></Card>
-
         </div>
+
       </main>
     </>
   )

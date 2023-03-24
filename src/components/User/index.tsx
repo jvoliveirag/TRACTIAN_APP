@@ -10,6 +10,8 @@ export default function Card({ name, email, company, unit, path }: {name: string
         <Link
             href={path}
             className={styles.user}
+            target="_blank"
+            rel="noopener noreferrer"
         >
             <h2 className={inter.className}>
                 {name} <span>-&gt;</span>

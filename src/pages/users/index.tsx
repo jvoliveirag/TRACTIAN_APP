@@ -2,26 +2,42 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { toast } from 'react-toastify';
+
 import axios from 'axios';
 import { FormEvent, useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
 
 import User from '@/components/User';
+import ClientUsers from '@/services/api';
 
-export default function Assets() {
+export default function Users() {
 
-  const [assets, setAssets] = useState<any[]>([])
+  const [id, setId] = useState<any>();
 
-  useEffect(() => {
-    axios.get("https://my-json-server.typicode.com/tractian/fake-api/users")
-    .then((response) => {
-      console.log(response.data)
-      setAssets(response.data)
-    })
-    .catch(() => {
-      console.log("Algo deu errado")
-    })
-  },[])
+  const [users, setUsers] = useState<any[]>([])
+
+  async function handleFilter(e:any) {
+    e.preventDefault();
+    const response:any = await ClientUsers.listById(id);
+    if (response.status === 200) {
+        toast.success('Veículo encontrado com sucesso!');
+        setUsers(response.data);
+    } else {
+        toast.error('Ops algo deu errado!');
+    }
+  }
+
+  // useEffect(() => {
+  //   axios.get("https://my-json-server.typicode.com/tractian/fake-api/users")
+  //   .then((response) => {
+  //     console.log(response.data)
+  //     setUsers(response.data)
+  //   })
+  //   .catch(() => {
+  //     console.log("Algo deu errado")
+  //   })
+  // },[])
 
 
   return (
@@ -48,8 +64,27 @@ export default function Assets() {
           </Link>
         </div>
 
+        <div className={styles.code}>
+                    
+          <form className="form-profile" onSubmit={handleFilter}>
+
+            <label className={styles.code}>Selecione o Id do usuário</label>
+            <select className={styles.code} name="id" id="id" value={id} onChange={(e) => setId(e.target.value)}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="all" selected>All</option>
+            </select>
+
+            <input className={styles.code} type="submit" value="Consultar"></input>
+          </form>
+
+        </div>
+
         <div className={styles.grid}>
-          {assets.map((user, key) => {
+          {users.map((user, key) => {
             
             let company = ''
             let unit = ''

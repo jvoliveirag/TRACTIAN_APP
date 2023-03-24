@@ -1,6 +1,5 @@
 import client from './config';
 
-const assetsPath = '/assets';
 const userPath = '/users';
 const companiesPath = '/companies';
 const unitsPath = '/units';
@@ -27,7 +26,7 @@ const ClientUsers = {
         }
     },
 
-    async listById(data:any) {
+    async listUserById(data:any) {
         try {
             if(data === 'all' || data === undefined){
                 const response = await client.get(`${userPath}`);
@@ -42,7 +41,7 @@ const ClientUsers = {
         }
     },
 
-    async DeleteById(data:number) {
+    async DeleteUserById(data:number) {
         try {
             const response = await client.delete(`${userPath}`,{params: {id: data}});
             return response;

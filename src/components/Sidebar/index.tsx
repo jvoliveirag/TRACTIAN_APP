@@ -10,6 +10,8 @@ export default function Sidebar({ path1, name1, path2, name2, path3, name3 }: {
     return (
         <div>
             <div className={styles.sidebar}>
+                
+                <br></br>
                 <Link
                     href="https://tractian.com/"
                     target="_blank"
@@ -23,7 +25,8 @@ export default function Sidebar({ path1, name1, path2, name2, path3, name3 }: {
                         priority
                     />
                 </Link>
-                
+                <br></br>
+
                 <Link href="/">
                     <FaHome color="white" size={20} />
                     <p className={styles.code}>Página inicial</p>
@@ -40,6 +43,8 @@ export default function Sidebar({ path1, name1, path2, name2, path3, name3 }: {
                     <FaCircle color="white" size={10} />
                     <p className={styles.code}>{name3}</p>
                 </Link>
+                <br></br>
+                <br></br>
             </div>
 
         </div>

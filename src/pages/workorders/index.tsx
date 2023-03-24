@@ -49,12 +49,17 @@ export default function Assets() {
             //console.log(workorder.assignedUserIds.length)
 
             return(
-              <div key={key}>
+              <div className={styles.card} key={key}>
                 <span className="">Task: {workorder.title}</span><br></br>
                 <span className="">Descrição: {workorder.description}</span><br></br>
+                <span className="">Ativo: {workorder.assetId}</span><br></br>
                 <span className="">Assignees: {workorder.assignedUserIds}</span><br></br>
                 <span className="">Status: {workorder.status}</span><br></br>
                 <span className="">Prioridade: {workorder.priority}</span><br></br>
+                <div className={styles.task_button}>
+                  <button className={styles.edit}>Editar</button>
+                  <button className={styles.delete}>Excluir</button>
+                </div>
               </div>
             )
 

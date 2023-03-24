@@ -61,7 +61,7 @@ export default function Users() {
           <h1 className={styles.title}>Colaboradores</h1>
         </div>
 
-        <div className={styles.center}>
+        <div>
           <div className={styles.form}>
                       
             <form className="form-profile" onSubmit={handleFilter}>

@@ -43,6 +43,12 @@ export default function Assets() {
           <h1 className={styles.title}>Unidades</h1>
         </div>
 
+        <div className={styles.buttons}>
+          <button className={styles.edit}>Editar</button>
+          <button className={styles.add}>Nova Unidade</button>
+          <button className={styles.delete}>Excluir</button>
+        </div>
+
         <div className={styles.companies}>
           {assets.map((unit, key) => {
 

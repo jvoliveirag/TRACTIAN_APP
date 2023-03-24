@@ -1,15 +1,13 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 
 import { toast } from 'react-toastify';
 
-import axios from 'axios';
+//import axios from 'axios';
 import { FormEvent, useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
 
 import User from '@/components/User';
-import ClientUsers from '@/services/api';
+import ClientUsers from '@/services/users';
 import Sidebar from '@/components/Sidebar';
 
 export default function Users() {
@@ -20,26 +18,27 @@ export default function Users() {
 
   async function handleFilter(e:any) {
     e.preventDefault();
-    const response:any = await ClientUsers.listById(id);
+    const response:any = await ClientUsers.listUserById(id);
     if (response.status === 200) {
-        toast.success('Veículo encontrado com sucesso!');
+        toast.success('Sucesso!');
         setUsers(response.data);
     } else {
         toast.error('Ops algo deu errado!');
     }
   }
 
-  // useEffect(() => {
-  //   axios.get("https://my-json-server.typicode.com/tractian/fake-api/users")
-  //   .then((response) => {
-  //     console.log(response.data)
-  //     setUsers(response.data)
-  //   })
-  //   .catch(() => {
-  //     console.log("Algo deu errado")
-  //   })
-  // },[])
-
+  /* UMA REQUEST (ALL) E JA EXIBE TUDO ASSIM QUE CARREGA A PAGINA
+  useEffect(() => {
+    axios.get("https://my-json-server.typicode.com/tractian/fake-api/users")
+    .then((response) => {
+      console.log(response.data)
+      setUsers(response.data)
+    })
+    .catch(() => {
+      console.log("Algo deu errado")
+    })
+  },[])
+  */
 
   return (
     <>

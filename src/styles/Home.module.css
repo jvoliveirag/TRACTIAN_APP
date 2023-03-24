@@ -67,6 +67,17 @@
   gap: 10px
 }
 
+.graph_page{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(50%, auto));
+  width: var(--max-width);
+  max-width: 100%;
+  margin-top: -60px;
+  margin-left: 40px;
+  margin-bottom: 20px;
+  gap: 10px
+}
+
 .code {
   font-weight: 700;
   font-size: 20px;
@@ -78,7 +89,8 @@
   font-weight: 700;
   font-size: 20px;
   font-family: var(--font-mono);
-  margin-left: 10px
+  margin-left: 10px;
+  position: relative
 }
 
 .label {
@@ -122,6 +134,15 @@
   margin-bottom: 0px
 }
 
+.img {
+  margin-top: 15px;
+  margin-bottom: 0px
+}
+
+.buttons {
+  
+}
+
 .edit {
   font-weight: 700;
   font-size: 15px;
@@ -149,6 +170,21 @@
 }
 .delete:hover {
   background-color: #f00111;
+}
+
+.add {
+  font-weight: 700;
+  font-size: 15px;
+  font-family: var(--font-mono);
+  margin-left: 10px;
+  background-color: #1e3a8a;
+  border-radius: 10px;
+  border: none;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+.add:hover {
+  background-color: #1e3a9a;
 }
 
 .grid {
@@ -315,6 +351,10 @@
     transform: none;
   }
 
+  .add:hover {
+    transform: none;
+  }
+
   .edit:hover {
     transform: none;
   }
@@ -338,20 +378,41 @@
   .form {
     display: absolute;
     justify-content: center;
-    position: fixed;
+    position: relative;
+    margin-left: -12px;
     width: 100%;
+  }
+
+  .task_button {
+    display: absolute;
+    justify-content: center;
+    position: relative;
+    margin-left: -12px;
+    width: 100%;
+  }
+
+  .img {
+    width: 300%;
+    height: 300%
   }
   
   .edit {
-    margin-left: 15px
+    margin-left: 10px
   }
   
   .delete {
     margin-top: 10px
   }
 
-  .label {
+  .add {
+    margin-top: 10px
+  }
 
+  .label {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
   }
   
   .filter {
@@ -359,7 +420,11 @@
   }
   
   .submit {
-
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
   }
 
   .user_grid {
@@ -389,6 +454,11 @@
 
   .graph {
     grid-template-columns: 2fr; 
+  }
+
+  .graph_page {
+    grid-template-columns: 2fr; 
+    margin-left: 0;
   }
 
   .card {
@@ -498,6 +568,11 @@
 
   .graph {
     grid-template-columns: repeat(2, 50%);
+  }
+
+  .graph_page {
+    grid-template-columns: repeat(1, 100%);
+    margin-left: 60px;
   }
 }
 

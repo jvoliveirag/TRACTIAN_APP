@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
+import { FaTrash, FaEdit } from "react-icons/fa";
 
 import axios from 'axios';
-import { FormEvent, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
 
 import Sidebar from '@/components/Sidebar';
@@ -15,7 +14,6 @@ export default function Assets() {
   useEffect(() => {
     axios.get("https://my-json-server.typicode.com/tractian/fake-api/workorders")
     .then((response) => {
-      console.log(response.data)            
       setAssets(response.data)
     })
     .catch(() => {
@@ -46,19 +44,43 @@ export default function Assets() {
 
         <div className={styles.code}>
           {assets.map((workorder, key) => {
-            //console.log(workorder.assignedUserIds.length)
+
+            let size = workorder.assignedUserIds.length
+            let userIds = workorder.assignedUserIds.toString().split(',',size)
+
+            let user_name = []
+
+            for (let i=0; i < size; i++ ){
+              switch(userIds[i]){
+                case "1":
+                  user_name.push('John Doe, ');
+                  break;
+                case "2":
+                  user_name.push('Jane Doe, ');
+                  break;
+                case "3":
+                  user_name.push('Bob Smith ');
+                  break;
+                case "4":
+                  user_name.push('Sarah Johnson, ');
+                  break;
+                case "5":
+                  user_name.push('Tim Brown');
+                  break;
+              }
+            }
 
             return(
               <div className={styles.card} key={key}>
                 <span className="">Task: {workorder.title}</span><br></br>
                 <span className="">Descrição: {workorder.description}</span><br></br>
                 <span className="">Ativo: {workorder.assetId}</span><br></br>
-                <span className="">Assignees: {workorder.assignedUserIds}</span><br></br>
+                <span className="">Assignees: {user_name}</span><br></br>
                 <span className="">Status: {workorder.status}</span><br></br>
                 <span className="">Prioridade: {workorder.priority}</span><br></br>
                 <div className={styles.task_button}>
-                  <button className={styles.edit}>Editar</button>
-                  <button className={styles.delete}>Excluir</button>
+                  <button className={styles.edit}><a><FaEdit color="white" size={16} /> Editar</a></button>
+                  <button className={styles.delete}><a><FaTrash color="white" size={16} /> Excluir</a></button>
                 </div>
               </div>
             )

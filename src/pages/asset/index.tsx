@@ -1,21 +1,35 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from 'rc-image';
+import { toast } from 'react-toastify';
 
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-
-import axios from 'axios';
+//import axios from 'axios';
 import { FormEvent, useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
 
 import Sidebar from '@/components/Sidebar';
 
+import ClientAssets from '@/services/assets';
+
 export default function Assets() {
 
-  let id = 1
+  //let id = 1
   const [assets, setAssets] = useState<any[]>([])
 
+  const [id, setId] = useState<any>();
+
+
+  async function handleFilter(e:any) {
+    e.preventDefault();
+    const response:any = await ClientAssets.listAssetById(id);
+    if (response.status === 200) {
+        toast.success('Sucesso!');
+        setAssets(response.data);
+    } else {
+        toast.error('Ops algo deu errado!');
+    }
+  }
+
+  /*
   useEffect(() => {
     axios.get("https://my-json-server.typicode.com/tractian/fake-api/assets", {
       params: {
@@ -30,22 +44,7 @@ export default function Assets() {
       console.log("Algo deu errado")
     })
   },[])
-
-  const options = {
-    chart: {
-      type: 'spline',
-      borderRadius: 10,
-      height: (9 / 16 * 100) + '%',
-    },
-    title: {
-      text: 'My chart'
-    },
-    series: [
-      {
-        data: [1, 2, 1, 4, 8, 3, 5]
-      }
-    ]
-  };
+  */
 
   return (
     <>
@@ -65,24 +64,73 @@ export default function Assets() {
           <h1 className={styles.title}>Ativos</h1>
         </div>
 
-        <div className={styles.graph}>
-          <HighchartsReact highcharts={Highcharts} options={options} />
-          <HighchartsReact highcharts={Highcharts} options={options} />
-          <HighchartsReact highcharts={Highcharts} options={options} />
-          <HighchartsReact highcharts={Highcharts} options={options} />
+        <div>
+          <div className={styles.form}>
+                      
+            <form className="form-profile" onSubmit={handleFilter}>
+
+              <label className={styles.label}>Selecione o Id do ativo
+                <select className={styles.filter} name="id" id="id" value={id} onChange={(e) => setId(e.target.value)}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="all" selected>All</option>
+                </select>
+              </label>
+              <input className={styles.submit} type="submit" value="Consultar"></input>
+              <a className={styles.submit} type="submit" href='charts'>Gráficos</a>
+
+            </form>
+          </div>
         </div>
+        <br></br>
 
         <div className={styles.code}>
           {assets.map((asset, key) => {
 
+            let unit_name = ''
+            asset.unitId === 1 ? unit_name = 'Jaguar Unit' : unit_name = 'Tobias Unit'
+
+            let date = asset.metrics.lastUptimeAt.split("T",1)
+            let time = asset.metrics.lastUptimeAt.slice(11,-5)
+            let lastUptime = date.concat(" às ", time)
+
+            let status = ''
+            switch(asset.status){
+              case "inAlert":
+                status = 'EM ALERTA!';
+                break;
+              case "inOperation":
+                status = 'Em Operação';
+                break;
+              case "inDowntime":
+                status = 'Em Parada';
+                break;
+            }
+
             return (
-              <div key={key}>
+              <div className={styles.card} key={key}>
+
                 <span className="">Nome: {asset.name}</span><br></br>
                 <span className="">Modelo: {asset.model}</span><br></br>
-                <span className="">Status: {asset.status}</span><br></br>
+                <span className="">Unidade: {unit_name}</span><br></br>
+                <span className="">Status: {status}</span><br></br>
                 <span className="">Total de coletas: {asset.metrics.totalCollectsUptime}</span><br></br>
                 <span className="">Horas coletadas: {asset.metrics.totalUptime}</span><br></br>
-                <span className="">Última coleta: {asset.metrics.lastUptimeAt}</span>
+                <span className="">Última coleta: {lastUptime}</span>
+
+                <div className={styles.img}>
+                  <Image
+                    src={asset.image}
+                    alt="Ativo"
+                    width='50%'
+                    height='50%'
+                  />
+                </div>
+
               </div>
             )
 

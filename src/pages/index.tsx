@@ -8,17 +8,16 @@ import styles from '@/styles/Home.module.css'
 import Card from '@/components/Card'
 
 import axios from 'axios';
-import { FormEvent, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Home() {
-
 
   const [assets, setAssets] = useState<any[]>([])
 
   useEffect(() => {
     axios.get("https://my-json-server.typicode.com/tractian/fake-api/assets")
     .then((response) => {
-      console.log(response.data)
+      console.log(response.data[1].specifications.maxTemp)
       setAssets(response.data)
     })
     .catch(() => {
@@ -26,37 +25,8 @@ export default function Home() {
     })
   },[])
 
-  const options1 = {
-    chart: {
-      type: 'spline',
-      borderRadius: 10,
-      height: (9 / 16 * 100) + '%',
-    },
-    title: {
-      text: 'Temperatura Máxima [ºC]'
-    },
-    series: [
-      {
-        data: [1,4,2,5,3,8]
-      }
-    ]
-  };
-
-  const options2 = {
-    chart: {
-      type: 'bar',
-      borderRadius: 10,
-      height: (9 / 16 * 100) + '%',
-    },
-    title: {
-      text: 'Saúde [%]'
-    },
-    series: [
-      {
-        data: [8,4,2,5,3,1]
-      }
-    ]
-  };
+  let options1 = {}
+  let options2 = {}
 
   return (
     <>
@@ -85,6 +55,84 @@ export default function Home() {
         </div>
         
         <div className={styles.graph}>
+          {assets.map((asset, key) => {
+
+            options1 = {
+              chart: {
+                type: 'spline',
+                borderRadius: 10,
+                height: (9 / 16 * 100) + '%',
+              },
+              title: {
+                text: 'Temperatura Máxima [°C] nos ativos'
+              },
+              xAxis: {
+                categories: [
+                              assets[0].name, 
+                              assets[1].name,
+                              assets[2].name,
+                              assets[3].name,
+                              assets[4].name,
+                              assets[5].name
+                            ]
+              },
+              series: [
+                {
+                  name: 'Temperatura',
+
+                  data: [
+                          assets[0].specifications.maxTemp, 
+                          assets[1].specifications.maxTemp, 
+                          assets[2].specifications.maxTemp,
+                          assets[3].specifications.maxTemp,
+                          assets[4].specifications.maxTemp,
+                          assets[5].specifications.maxTemp
+                        ]
+                }
+              ]
+            };
+
+            options2 = {
+              chart: {
+                type: 'bar',
+                borderRadius: 10,
+                height: (9 / 16 * 100) + '%',
+              },
+              title: {
+                text: 'Saúde dos ativos em [%]'
+              },
+              xAxis: {
+                categories: [
+                              assets[0].name, 
+                              assets[1].name,
+                              assets[2].name,
+                              assets[3].name,
+                              assets[4].name,
+                              assets[5].name
+                            ]
+              },
+              series: [
+                {
+                  name: "Saúde [%]",
+                  data: [
+                          assets[0].healthscore, 
+                          assets[1].healthscore, 
+                          assets[2].healthscore,
+                          assets[3].healthscore,
+                          assets[4].healthscore,
+                          assets[5].healthscore
+                        ]
+                },
+              ]
+            };
+
+            return(
+              <div className={styles.code} key={key}>
+
+              </div>
+            )
+
+          })}
 
           <HighchartsReact highcharts={Highcharts} options={options1} />
           <HighchartsReact highcharts={Highcharts} options={options2} />

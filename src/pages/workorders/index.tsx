@@ -7,14 +7,14 @@ import styles from '@/styles/Home.module.css'
 
 import Sidebar from '@/components/Sidebar';
 
-export default function Assets() {
+export default function Workorders() {
 
-  const [assets, setAssets] = useState<any[]>([])
+  const [workorders, setWorkorders] = useState<any[]>([])
 
   useEffect(() => {
     axios.get("https://my-json-server.typicode.com/tractian/fake-api/workorders")
     .then((response) => {
-      setAssets(response.data)
+      setWorkorders(response.data)
     })
     .catch(() => {
       console.log("Algo deu errado")
@@ -43,7 +43,7 @@ export default function Assets() {
 
 
         <div className={styles.code}>
-          {assets.map((workorder, key) => {
+          {workorders.map((workorder, key) => {
 
             let size = workorder.assignedUserIds.length
             let userIds = workorder.assignedUserIds.toString().split(',',size)

@@ -1,12 +1,10 @@
 import Head from 'next/head'
-import Image from 'rc-image';
-import { toast } from 'react-toastify';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import axios from 'axios';
-import { FormEvent, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
 
 import Sidebar from '@/components/Sidebar';

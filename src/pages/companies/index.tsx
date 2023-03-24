@@ -1,23 +1,21 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 
 import axios from 'axios';
-import { FormEvent, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
 
 import Card from '@/components/Card';
 import Sidebar from '@/components/Sidebar';
 
-export default function Assets() {
+export default function Companies() {
 
-  const [assets, setAssets] = useState<any[]>([])
+  const [companies, setCompanies] = useState<any[]>([])
 
   useEffect(() => {
     axios.get("https://my-json-server.typicode.com/tractian/fake-api/units")
     .then((response) => {
       console.log(response.data)
-      setAssets(response.data)
+      setCompanies(response.data)
     })
     .catch(() => {
       console.log("Algo deu errado")
@@ -50,7 +48,7 @@ export default function Assets() {
         </div>
 
         <div className={styles.companies}>
-          {assets.map((unit, key) => {
+          {companies.map((unit, key) => {
 
             let company_name = ''
             unit.companyId === 1 ? company_name = 'The Test Company' : company_name = 'Não encontrado'

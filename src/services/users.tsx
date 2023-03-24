@@ -1,10 +1,6 @@
 import client from './config';
 
 const userPath = '/users';
-const companiesPath = '/companies';
-const unitsPath = '/units';
-const workordersPath = '/workorders';
-
 
 const ClientUsers = {
     async createUser(data:{}) {

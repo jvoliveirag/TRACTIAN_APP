@@ -1,9 +1,8 @@
 import Head from 'next/head'
-
 import { toast } from 'react-toastify';
 
 //import axios from 'axios';
-import { FormEvent, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styles from '@/styles/Home.module.css'
 
 import User from '@/components/User';

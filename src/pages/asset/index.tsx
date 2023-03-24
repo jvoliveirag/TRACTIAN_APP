@@ -2,8 +2,7 @@ import Head from 'next/head'
 import Image from 'rc-image';
 import { toast } from 'react-toastify';
 
-//import axios from 'axios';
-import { FormEvent, useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from '@/styles/Home.module.css'
 
 import Sidebar from '@/components/Sidebar';
@@ -12,11 +11,8 @@ import ClientAssets from '@/services/assets';
 
 export default function Assets() {
 
-  //let id = 1
   const [assets, setAssets] = useState<any[]>([])
-
   const [id, setId] = useState<any>();
-
 
   async function handleFilter(e:any) {
     e.preventDefault();
@@ -28,23 +24,6 @@ export default function Assets() {
         toast.error('Ops algo deu errado!');
     }
   }
-
-  /*
-  useEffect(() => {
-    axios.get("https://my-json-server.typicode.com/tractian/fake-api/assets", {
-      params: {
-        id: id
-      }
-    })
-    .then((response) => {
-      console.log(response.data)
-      setAssets(response.data)
-    })
-    .catch(() => {
-      console.log("Algo deu errado")
-    })
-  },[])
-  */
 
   return (
     <>

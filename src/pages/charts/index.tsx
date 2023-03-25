@@ -13,13 +13,9 @@ export default function Assets() {
 
   const [assets, setAssets] = useState<any[]>([])
 
-  const [id, setId] = useState<any>();
-
-
   useEffect(() => {
     axios.get("https://my-json-server.typicode.com/tractian/fake-api/assets")
     .then((response) => {
-      console.log(response.data)
       setAssets(response.data)
     })
     .catch(() => {
@@ -27,22 +23,10 @@ export default function Assets() {
     })
   },[])
 
-
-  const options = {
-    chart: {
-      type: 'spline',
-      borderRadius: 10,
-      height: (9 / 16 * 100) + '%',
-    },
-    title: {
-      text: 'My chart'
-    },
-    series: [
-      {
-        data: [1, 2, 1, 4, 8, 3, 5]
-      }
-    ]
-  };
+  let options1 = {}
+  let options2 = {}
+  let options3 = {}
+  let options4 = {}
 
   return (
     <>
@@ -59,10 +43,165 @@ export default function Assets() {
       <main className={styles.main}>
 
         <div className={styles.graph_page}>
-          <HighchartsReact highcharts={Highcharts} options={options} />
-          <HighchartsReact highcharts={Highcharts} options={options} />
-          <HighchartsReact highcharts={Highcharts} options={options} />
-          <HighchartsReact highcharts={Highcharts} options={options} />
+          {assets.map((asset, key) => {
+
+            options1 = {
+              chart: {
+                type: 'bar',
+                borderRadius: 10,
+                height: (9 / 16 * 100) + '%',
+              },
+              colors: ['red'],
+              title: {
+                text: 'Potência em [Kwh] nos ativos'
+              },
+              xAxis: {
+                categories: [
+                              assets[0].name, 
+                              assets[1].name,
+                              assets[2].name,
+                              assets[3].name,
+                              assets[4].name,
+                              assets[5].name
+                            ]
+              },
+              series: [
+                {
+                  name: 'Potência [Kwh]',
+
+                  data: [
+                          0, 
+                          assets[1].specifications.power,
+                          assets[2].specifications.power,
+                          assets[3].specifications.power,
+                          assets[4].specifications.power,
+                          assets[5].specifications.power
+                        ]
+                }
+              ]
+            };
+
+            options2 = {
+              chart: {
+                type: 'column',
+                borderRadius: 10,
+                height: (9 / 16 * 100) + '%',
+              },
+              colors: ['purple'],
+              title: {
+                text: 'RPM'
+              },
+              xAxis: {
+                categories: [
+                              assets[0].name, 
+                              assets[1].name,
+                              assets[2].name,
+                              assets[3].name,
+                              assets[4].name,
+                              assets[5].name
+                            ]
+              },
+              series: [
+                {
+                  name: "rpm",
+                  data: [
+                          0, 
+                          assets[1].specifications.rpm, 
+                          assets[2].specifications.rpm,
+                          assets[3].specifications.rpm,
+                          assets[4].specifications.rpm,
+                          assets[5].specifications.rpm
+                        ]
+                },
+              ]
+            };
+
+            options3= {
+              chart: {
+                type: 'pie',
+                borderRadius: 10,
+                height: (9 / 16 * 100) + '%',
+              },
+              colors: ['purple','red','yellow','blue','green','orange'],
+              title: {
+                text: 'Total de coletas Uptime [ligada]'
+              },
+              series: [
+                {
+                  name: 'Total de coletas Uptime',
+                  data: [
+                          {
+                            name: assets[0].name,
+                            y: assets[0].metrics.totalCollectsUptime, 
+                          },
+                          {
+                            name: assets[1].name,
+                            y: assets[1].metrics.totalCollectsUptime, 
+                          },                    {
+                            name: assets[2].name,
+                            y: assets[2].metrics.totalCollectsUptime, 
+                          },                    {
+                            name: assets[3].name,
+                            y: assets[3].metrics.totalCollectsUptime, 
+                          },                    {
+                            name: assets[4].name,
+                            y: assets[4].metrics.totalCollectsUptime, 
+                          },                    {
+                            name: assets[5].name,
+                            y: assets[5].metrics.totalCollectsUptime, 
+                          },
+                        ]
+                },
+              ]
+            };
+
+            options4 = {
+              chart: {
+                type: 'bar',
+                borderRadius: 10,
+                height: (9 / 16 * 100) + '%',
+              },
+              colors: ['gray'],
+              title: {
+                text: 'Total de horas de coletas Uptime'
+              },
+              xAxis: {
+                categories: [
+                              assets[0].name, 
+                              assets[1].name,
+                              assets[2].name,
+                              assets[3].name,
+                              assets[4].name,
+                              assets[5].name
+                            ]
+              },
+              series: [
+                {
+                  name: 'Total de horas [h]',
+
+                  data: [
+                          assets[0].metrics.totalUptime, 
+                          assets[1].metrics.totalUptime,
+                          assets[2].metrics.totalUptime,
+                          assets[3].metrics.totalUptime,
+                          assets[4].metrics.totalUptime,
+                          assets[5].metrics.totalUptime
+                        ]
+                }
+              ]
+            };
+
+          return(
+            <div className={styles.code} key={key}>
+
+            </div>
+          )
+
+          })}
+          <HighchartsReact highcharts={Highcharts} options={options1} />
+          <HighchartsReact highcharts={Highcharts} options={options2} />
+          <HighchartsReact highcharts={Highcharts} options={options3} />
+          <HighchartsReact highcharts={Highcharts} options={options4} />
         </div>
 
         <br></br>

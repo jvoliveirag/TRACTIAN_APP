@@ -63,6 +63,7 @@ export default function Home() {
                 borderRadius: 10,
                 height: (9 / 16 * 100) + '%',
               },
+              colors: ['orange'],
               title: {
                 text: 'Temperatura Máxima [°C] nos ativos'
               },
@@ -98,6 +99,7 @@ export default function Home() {
                 borderRadius: 10,
                 height: (9 / 16 * 100) + '%',
               },
+              colors: ['#22c55e'],
               title: {
                 text: 'Saúde dos ativos em [%]'
               },

@@ -74,7 +74,7 @@ a aplicação conta com a função de Read implementada, podendo filtrar ativos 
 
 Para simular as demais ações (Create, Update e Delete) foram criadas requests no **Postman** em um workspace que pode ser acessado clicando <a href="https://elements.getpostman.com/redirect?entityId=20892768-53c4675d-3308-40b9-8dad-1b4269084834&entityType=collection">aqui</a>. 
 
-As requisições simulam os botões que já estão inseridos na aplicação, porém ainda não possuem a funcionalidade implementada. No entanto todas as requests retornam status 200 (ok) ou 201 (created) confirmando o funcionamento.
+As requisições simulam os botões que já estão inseridos na aplicação, porém ainda não possuem a funcionalidade implementada. No entanto todas as requests retornam status 200 (ok) ou 201 (created) confirmando o funcionamento. Para obter um tutorial simples de como rodar as requests clique <a href="https://drive.google.com/file/d/1jxQZkg6XC-eaH9UwWdqjcDL7o-MYGek5/view?usp=share_link">aqui</a>
 
 </div>
 <br>

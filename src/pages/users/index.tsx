@@ -7,7 +7,7 @@ import styles from '@/styles/Home.module.css'
 
 import User from '@/components/User';
 import ClientUsers from '@/services/users';
-import Sidebar from '@/components/Sidebar';
+import { Sidebar } from '@/components/Sidebar';
 
 export default function Users() {
 

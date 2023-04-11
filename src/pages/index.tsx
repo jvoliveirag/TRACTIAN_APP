@@ -5,9 +5,9 @@ import Link from 'next/link'
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import styles from '@/styles/Home.module.css'
-import Card from '@/components/Card'
-
 import axios from 'axios';
+
+import { Card } from '../components/Card'
 import { useState, useEffect } from 'react'
 
 export default function Home() {

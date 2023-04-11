@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useState } from 'react'
 import styles from '@/styles/Home.module.css'
 
-import Sidebar from '@/components/Sidebar';
+import { Sidebar } from '@/components/Sidebar';
 
 import ClientAssets from '@/services/assets';
 

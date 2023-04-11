@@ -6,7 +6,7 @@ import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Card({ title, description, path }: {title: string; description: string; path: string}) {
+function Card({ title, description, path }: {title: string; description: string; path: string}) {
   return (
     <Link
       href={path}
@@ -21,3 +21,5 @@ export default function Card({ title, description, path }: {title: string; descr
     </Link>
   )
 }
+
+export { Card }

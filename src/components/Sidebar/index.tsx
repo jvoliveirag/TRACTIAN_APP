@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 import Image from 'next/image'
 
-export default function Sidebar({ path1, name1, path2, name2, path3, name3 }: {
+function Sidebar({ path1, name1, path2, name2, path3, name3 }: {
     path1: string; path2: string; path3: string, name1: string, name2: string, name3: string}) {
     
     return (
@@ -51,3 +51,5 @@ export default function Sidebar({ path1, name1, path2, name2, path3, name3 }: {
 
     )
 }
+
+export { Sidebar }
